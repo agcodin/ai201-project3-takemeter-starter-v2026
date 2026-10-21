@@ -51,93 +51,47 @@ whether you hit them:
 
 ---
 
-## 1.
+## 1. Overall accuracy on the held-out set
 
-<!-- Your criterion. It must name a number. -->
-
-
+Accuracy on the held-out test split is at least 0.62 on all three seeds.
 
 **Why this target:**
-
-
+My three labels are not even, so a model that always guessed `hot_take` would score about 0.47 on my file. A target of 0.62 means the model has to be clearly better than that one trick, while leaving room for the fact that my hardest boundary is a judgement call I sometimes made slowly myself. I would not trust a sorter below this on a forum where half the posts argue with each other.
 
 ---
 
-## 2.
+## 2. The weakest label still works
 
-<!-- Your criterion. -->
-
-
+Every label has an F1 of at least 0.45 on all three seeds, and `analysis` has an F1 of at least 0.60.
 
 **Why this target:**
-
-
+`banter` is only 42 of my 225 rows, so about 6 land in the test split and one misread post swings its F1 by a lot. That is why its floor is low. `analysis` gets the higher bar because it has 77 examples and it is the label the whole project is for. A tool that cannot find the posts with facts in them has no reason to exist.
 
 ---
 
-## 3.
+## 3. Not just guessing the biggest label
 
-<!-- Your criterion. -->
-
-
+The model predicts each of the three labels at least 5 times across the held-out set, and no single label is predicted for more than 70% of the test posts.
 
 **Why this target:**
-
-
+`hot_take` is 47% of my data, and the failure I most expect is a model that learns to say `hot_take` and nothing else. Accuracy alone would hide that, since guessing it every time already scores near 0.47. The 70% ceiling matches the cap the brief puts on the data itself, so the model is held to the same standard as my labelling.
 
 ---
 
-## 4.
+## 4. Agreement with a second labeller
 
-<!-- Your criterion. -->
-
-
+On the 20 posts labelled cold, my labels and a second person's labels agree on at least 14 of 20, which is 70%.
 
 **Why this target:**
-
-
+If two people cannot apply my definitions the same way, then the model was trained on noise and the other four criteria are measuring my inconsistency rather than its learning. I picked 70% rather than 90% because my hardest boundary is real. Deciding whether a post that names one driver is analysis or a hot take took me several seconds on maybe a tenth of the file.
 
 ---
 
-## 5.
+## 5. Confident predictions are the right ones more often
 
-<!-- Your criterion. -->
-
-
+Predictions where the model's top probability is at least 0.80 are correct at least 15 percentage points more often than predictions below 0.60.
 
 **Why this target:**
-
-
+A classifier that is equally wrong when sure and unsure is unusable for triage, which is the only thing I would ever want this for. Sorting a day of comments means reading the confident `analysis` ones first and ignoring the rest. I chose a gap in percentage points rather than two separate accuracy numbers, because the gap is what makes the confidence score worth reading.
 
 ---
-
-<!-- ─────────────────────────────────────────────────────────────────────────
-     UNIT 6 — read this before you change anything above.
-
-     If a criterion turns out to be BROKEN rather than merely unmet, you can
-     revise it, and that earns credit. But never delete or edit the original
-     line. Add the revision underneath, like this:
-
-         ## 2. Every label performs acceptably
-
-         The model performs well on all labels.
-
-         **Why this target:** ...
-
-         > **Revised in unit 6:** Every label has an F1 of at least 0.60 on
-         > the held-out set.
-         >
-         > **Why revised:** "performs well" gave me nothing to check. I
-         > couldn't produce a verdict from it at all.
-
-     That's a revision because the criterion couldn't be MEASURED.
-
-     Lowering a target because you missed it is not a revision, and it costs
-     you the point:
-
-         ✗ "Overall accuracy of at least 0.65" → "at least 0.55", because
-            0.65 turned out to be optimistic for 200 examples.
-
-     A number you missed stays where it is, gets diagnosed, and gets a fix
-     attempted. That's where the points are.
-     ───────────────────────────────────────────────────────────────────────── -->

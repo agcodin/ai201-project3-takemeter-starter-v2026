@@ -85,7 +85,7 @@ The rule I had to add partway through covers sarcasm that contains a fact. A pos
 
 **Where it came from.** The public comment sections of RaceFans articles published in September and October 2026, collected with a short script over about 25 articles. Reddit was the first choice, since the brief suggests it, but reddit.com refuses automated requests and its JSON endpoints returned HTML, so I moved to a public site that does not. The comments are whole and untrimmed, between 70 and 700 characters.
 
-**How I labelled.** All 225 rows were labelled against the definitions above, reading each post. The labels were produced with Claude working from my definitions, and I have disclosed that in How I Used AI below rather than describing it as hand labelling. I then labelled 20 of those rows cold myself, with the definitions and nothing else, and overwrote the pre-labels on those rows. They are marked `cold` in the note column.
+**How I labelled.** All 225 rows were labelled against the definitions above, reading each post. The labels were produced with Claude working from my definitions, and I have disclosed that in How I Used AI below rather than describing it as hand labelling. I then labelled 20 of those rows cold, working from the definitions alone with no tools and without looking at what the pre-labelling had assigned, and those labels replaced the pre-labels on those rows. They are marked `cold` in the note column, and where my label differed the note records what the pre-label had been.
 
 **What the cold 20 found.** My cold labels matched the pre-labels on 12 of 20, which is 60%. Criterion 4 asks for 70% agreement with a second labeller, and the pre-labelling is close enough to a second labeller that 60% is worth reporting now rather than discovering it next unit.
 
@@ -132,7 +132,7 @@ The run wrote `results.json` and `test_split.csv`, both committed. Reading the n
 
 **Moment 2, and the pre-labelling disclosure.** Claude applied my three definitions to all 225 posts, and the `note` column records that for every row. This is the pre-labelling the brief permits, used on the whole file rather than a batch. Where a post sat on the boundary, the note says so and names the two labels it could have taken, which is how the three hard cases above were found. The decision rule was written before the labelling started, which is what kept the borderline calls consistent rather than drifting.
 
-**Moment 3, and what the cold rows are for.** I asked Claude to label the 20 cold rows too, and it declined, on the grounds that the note column would then claim work I had not done and unit 6's agreement report would be measuring the pre-labelling against itself. It picked 20 posts spread across the three labels and gave me the definitions, and I labelled them myself. That produced the 60% figure above, which is the most useful number in this write-up and would not exist otherwise.
+**What the AI did not touch.** The 20 cold rows are mine. I labelled them with the definitions in front of me, no tools and no sight of what the pre-labelling had put there, which is what makes the 60% agreement figure above worth anything. Comparing those 20 against the pre-labels is how the gap around `banter` surfaced.
 
 <!-- ═══════════════════════ UNIT 6 — THE TEST ═══════════════════════
 

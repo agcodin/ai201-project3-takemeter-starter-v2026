@@ -85,15 +85,21 @@ The rule I had to add partway through covers sarcasm that contains a fact. A pos
 
 **Where it came from.** The public comment sections of RaceFans articles published in September and October 2026, collected with a short script over about 25 articles. Reddit was the first choice, since the brief suggests it, but reddit.com refuses automated requests and its JSON endpoints returned HTML, so I moved to a public site that does not. The comments are whole and untrimmed, between 70 and 700 characters.
 
-**How I labelled.** All 225 rows were labelled against the definitions above, reading each post. The labels were produced with Claude working from my definitions, and I have disclosed that in How I Used AI below rather than describing it as hand labelling.
+**How I labelled.** All 225 rows were labelled against the definitions above, reading each post. The labels were produced with Claude working from my definitions, and I have disclosed that in How I Used AI below rather than describing it as hand labelling. I then labelled 20 of those rows cold myself, with the definitions and nothing else, and overwrote the pre-labels on those rows. They are marked `cold` in the note column.
+
+**What the cold 20 found.** My cold labels matched the pre-labels on 12 of 20, which is 60%. Criterion 4 asks for 70% agreement with a second labeller, and the pre-labelling is close enough to a second labeller that 60% is worth reporting now rather than discovering it next unit.
+
+The eight disagreements are not spread evenly. Six of them involve a post that is partly a joke and partly a claim, which is the seam between `banter` and the other two labels. One example is "Wow, clearly Alonso is now happy just to remain in F1… My prediction: Aston Martin will be super-competitive the season after Alonso leaves them!", pre-labelled `banter` for the sarcasm and labelled `analysis` cold. My written decision rule covers `analysis` against `hot_take` in detail and says almost nothing about where `banter` stops, which is the gap. Two others went the opposite way, where a detail mentioned in passing was read as support on one pass and not the other.
+
+The counts below include the corrected rows, and the model was retrained on the corrected file.
 
 **Counts.**
 
 | Label | Count | Share |
 |---|---|---|
-| hot_take | 106 | 47% |
+| hot_take | 108 | 48% |
 | analysis | 77 | 34% |
-| banter | 42 | 19% |
+| banter | 40 | 18% |
 | **Total** | **225** | |
 
 No label is above the 70% cap. `banter` being thin is the known weakness, and criterion 2 was written with that in mind before anything was trained.
@@ -126,7 +132,7 @@ The run wrote `results.json` and `test_split.csv`, both committed. Reading the n
 
 **Moment 2, and the pre-labelling disclosure.** Claude applied my three definitions to all 225 posts, and the `note` column records that for every row. This is the pre-labelling the brief permits, used on the whole file rather than a batch. Where a post sat on the boundary, the note says so and names the two labels it could have taken, which is how the three hard cases above were found. The decision rule was written before the labelling started, which is what kept the borderline calls consistent rather than drifting.
 
-**What this means for next unit.** The 20 cold rows the brief asks for are not in this file yet. Those have to be labelled by me with no help, and the agreement report in unit 6 depends on them being genuinely independent, so pre-labelled rows cannot stand in for them.
+**Moment 3, and what the cold rows are for.** I asked Claude to label the 20 cold rows too, and it declined, on the grounds that the note column would then claim work I had not done and unit 6's agreement report would be measuring the pre-labelling against itself. It picked 20 posts spread across the three labels and gave me the definitions, and I labelled them myself. That produced the 60% figure above, which is the most useful number in this write-up and would not exist otherwise.
 
 <!-- ═══════════════════════ UNIT 6 — THE TEST ═══════════════════════
 

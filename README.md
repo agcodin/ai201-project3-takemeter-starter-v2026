@@ -132,190 +132,145 @@ The run wrote `results.json` and `test_split.csv`, both committed. Reading the n
 
 **Moment 2, and the pre-labelling disclosure.** Claude applied my three definitions to all 225 posts, and the `note` column records that for every row. This is the pre-labelling the brief permits, used on the whole file rather than a batch. Where a post sat on the boundary, the note says so and names the two labels it could have taken, which is how the three hard cases above were found. The decision rule was written before the labelling started, which is what kept the borderline calls consistent rather than drifting.
 
+**Moment 4, unit 6.** I had Claude read the confusion matrix against my cold-20 disagreement notes and say whether the `banter` collapse looked like thin data or inconsistent labelling. It said both, and pointed at the overlap, which is that six of my eight cold disagreements sat on the same seam the matrix collapses. I used that to pick adding examples over relabelling, and the result was that adding examples did nothing, which suggests the relabelling half of that answer mattered more.
+
 **What the AI did not touch.** The 20 cold rows are mine. I labelled them with the definitions in front of me, no tools and no sight of what the pre-labelling had put there, which is what makes the 60% agreement figure above worth anything. Comparing those 20 against the pre-labels is how the gap around `banter` surfaced.
 
-<!-- ═══════════════════════ UNIT 6 — THE TEST ═══════════════════════
-
-     Don't fill these in during unit 5.
-     ═══════════════════════════════════════════════════════════════════ -->
-
----
+# Unit 6
 
 ## Baseline vs. Trained
 
-<!-- Both models on the same posts. `python baseline.py --trained results.json`
-     prints this table for you. -->
+**My prediction, written before running the comparison:** the trained model will beat the zero-shot baseline on `hot_take`, because "a confident claim with no support offered" describes an absence and gives a zero-shot model nothing to match on, while 108 examples give a trained model the house style to learn.
+
+`baseline.py` ran `facebook/bart-large-mnli` over the same 39 held-out posts the trained model was scored on, using only my three label definitions as the prompt. The trained column is seed 42 from the improvement run.
 
 | Measure | Baseline | Trained | Difference |
 |---|---|---|---|
-| Overall accuracy |  |  |  |
-| Macro F1 |  |  |  |
-| F1 — `label_one` |  |  |  |
-| F1 — `label_two` |  |  |  |
+| Overall accuracy | 0.333 | 0.615 | +0.282 |
+| Macro F1 | 0.221 | 0.495 | +0.273 |
+| F1 — `analysis` | 0.511 | 0.818 | +0.308 |
+| F1 — `banter` | 0.154 | 0.000 | -0.154 |
+| F1 — `hot_take` | 0.000 | 0.667 | +0.667 |
 
-**What I predicted before I looked:**
-<!-- Milestone 1 asks you to write this BEFORE seeing the trained numbers. A
-     prediction made afterwards isn't one. -->
+The prediction held. The baseline never once guessed `hot_take` across 39 posts, exactly as expected, and that single label is where most of the +0.28 accuracy gap comes from.
 
-**What the gap actually means:**
-<!-- If the baseline matched your trained model, your fine-tuning added
-     nothing — and that is a real finding, not a failure. Say it plainly. -->
+The reverse is the more interesting half. The baseline is the only one of the two models that ever identifies `banter`, scoring 0.154 against my trained model's 0.000. A general model reading the word "banter" and the phrase "jokes, sarcasm" can spot a joke, while mine never predicts the label at all. Fine-tuning on 75 examples made that label worse than not training at all.
 
+**What my definitions were worth, measured.** I ran the baseline twice, once with `label_definitions.txt` and once without it, where it falls back to bare label names.
 
+| Baseline prompt | Accuracy | Macro F1 |
+|---|---|---|
+| My three written definitions | 0.333 | 0.221 |
+| Bare label names only | 0.410 | 0.272 |
 
----
+My definitions made the zero-shot model **worse**, by 7.7 points of accuracy. The bare-names run gets `hot_take` partly right (F1 0.549) and scores zero on `analysis`, which is the exact mirror of what the definitions do. I take this as evidence that my definition of `analysis` ("supports a claim with a specific checkable detail") reads to an entailment model as a description of almost any substantive post, so it swallows everything. The figure I report as my baseline is the 0.333 definitions run, since that is the prompt my project actually specifies.
 
 ## Run Log — Before
 
-<!-- Five criteria across three seeds. The notebook's section 6 prints the
-     spread table; the Target and Verdict columns are yours. -->
+Three seeds from section 6, written to `results_three_seeds_before.json`, on `mps` with torch 2.14.1. The dataset at this point was the 225 rows submitted in unit 5.
 
 | Criterion | Target | Seed 42 | Seed 7 | Seed 2024 | Verdict |
 |---|---|---|---|---|---|
-| 1.  |  |  |  |  |  |
-| 2.  |  |  |  |  |  |
-| 3.  |  |  |  |  |  |
-| 4.  |  |  |  |  |  |
-| 5.  |  |  |  |  |  |
+| 1. Overall accuracy | ≥ 0.62 on all seeds | 0.765 | 0.676 | 0.618 | MISSED |
+| 2. Every label F1 ≥ 0.45, `analysis` ≥ 0.60 | both, all seeds | banter 0.000 / analysis 0.909 | banter 0.000 / analysis 0.737 | banter 0.000 / analysis 0.588 | MISSED |
+| 3. Each label predicted ≥ 5 times, none above 70% of predictions | both, all seeds | banter 0, hot_take 71% | banter 0, hot_take 79% | banter 0, hot_take 85% | MISSED |
+| 4. Cold-20 agreement with a second labeller | ≥ 14 of 20 | 12 of 20 | 12 of 20 | 12 of 20 | MISSED |
+| 5. Confident predictions beat unsure ones by ≥ 15 points | ≥ 15 pts | 0.0 | 0.0 | 9.1 | MISSED, and unmeasurable as written |
 
-### Confusion matrix
+Criterion 4 is a property of the labels rather than of a split, so the same figure goes in all three columns.
 
-<!-- ⚠️ TYPED AS A MARKDOWN TABLE. The notebook prints one ready to paste.
-     An image of a matrix earns nothing. -->
+**Spread across seeds.** Accuracy moved 0.147 between the best and worst seed, and `analysis` F1 moved 0.321. The notebook flags anything above about ten points, and it is right to. With 34 test posts, two or three posts landing differently moves accuracy by six points on their own, so these three numbers describe my splits as much as my model.
 
-| true \ predicted |  |  |  |
+**Confusion matrix**, seed 42, before the improvement:
+
+| true \ predicted | analysis | hot_take | banter |
 |---|---|---|---|
-| **** |  |  |  |
-| **** |  |  |  |
-| **** |  |  |  |
+| **analysis** | 10 | 2 | 0 |
+| **hot_take** | 0 | 16 | 0 |
+| **banter** | 0 | 6 | 0 |
 
-**My biggest off-diagonal number, and what it means:**
-<!-- Not "the model made mistakes" — WHICH boundary it didn't learn, and which
-     direction. "7 real analysis posts were called hot_take and only 3 went the
-     other way" is a direction, not just an error rate. -->
-
-
-
----
+Six real `banter` posts were called `hot_take`, and nothing went the other way, because the model never predicts `banter` at all. The entire `banter` row collapses into one column.
 
 ## Verdicts and Diagnoses
 
-<!-- MET or MISSED against LAST UNIT's target. The target has to hold across
-     all three seeds, not turn up sometimes. -->
-
 | # | Criterion | Target | Verdict | How I decided |
 |---|---|---|---|---|
-| 1 |  |  |  |  |
-| 2 |  |  |  |  |
-| 3 |  |  |  |  |
-| 4 |  |  |  |  |
-| 5 |  |  |  |  |
+| 1 | Overall accuracy | ≥ 0.62, all seeds | MISSED | 0.618 on seed 2024, two thousandths under. The target has to hold across trials, and a miss by 0.002 is still a miss. Reading it as met would be the generous reading the brief warns about. |
+| 2 | Every label F1 ≥ 0.45, `analysis` ≥ 0.60 | both | MISSED | `banter` is 0.000 on all three seeds, so this fails before `analysis` is even considered. `analysis` also fell to 0.588 on seed 2024. |
+| 3 | Each label predicted ≥ 5 times, none above 70% | both | MISSED | `banter` was predicted 0 times on every seed, and `hot_take` took 71%, 79% and 85% of predictions. Both halves fail, and the trend across seeds is in the wrong direction. |
+| 4 | Cold-20 agreement | ≥ 14 of 20 | MISSED | 12 of 20, measured in unit 5 before any of this. |
+| 5 | Confident beat unsure by ≥ 15 points | ≥ 15 pts | MISSED | 0.0, 0.0 and 9.1 points. See the revision below, because the number I can compute is not the number the criterion names. |
 
-**Diagnoses**
+**Diagnosis for criteria 2 and 3, which are the same failure.** `banter` had 40 examples out of 225, so roughly 28 in training and 6 in test. The model learns that predicting `hot_take` on every borderline post is the cheapest way to cut loss, and with `hot_take` at 48% of the data that strategy is nearly as accurate as learning the boundary. The confusion matrix shows every `banter` post going to `hot_take` and not one going the other way, which is a direction rather than an error rate.
 
-<!-- For each miss: the cause, and how you know. The four common causes are:
-     too few examples for a label, a boundary you applied inconsistently, a
-     genuinely hard label pair, and a task the model can't reach from this
-     much data.
+My agreement report is what separates thin data from bad labels here, and it points at both. Six of the eight cold-20 disagreements were posts that are part joke and part claim, which is exactly the `banter` against `hot_take` seam the matrix collapses. So the model is failing on a boundary I did not apply consistently myself, on the label I gave it the fewest examples of.
 
-     ⚠️ Use your agreement report as evidence. It is the only instrument you
-     have that can tell a LABELLING problem from a MODEL problem, and this
-     section is graded on whether you used it that way. -->
+**Diagnosis for criterion 1.** Accuracy is carried by `hot_take`, which the model gets nearly free, and by `analysis`, which it genuinely learns. Seed 2024 fell under the line because its test split drew more `banter`, and every one of those is an automatic miss. This is the same failure as criteria 2 and 3 rather than a separate one.
 
+**Criterion 5, revised because it could not be measured.**
 
-
----
+> **Original:** Predictions where the model's top probability is at least 0.80 are correct at least 15 percentage points more often than predictions below 0.60.
+>
+> **Revised in unit 6:** Predictions in the most confident third are correct at least 15 percentage points more often than predictions in the least confident third.
+>
+> **Why revised:** No prediction my model makes ever reaches 0.80. I checked the raw softmax output on seed 42, and the highest top-probability across all 34 test posts is 0.574, with a mean of 0.499. Both bands my criterion names are empty, so it has no value at all rather than a bad one. Three labels and three epochs on 157 training rows leave the model barely off uniform, which I did not anticipate when I wrote the number. The revision measures the same idea against thirds, which is what `results.json` already records. It still misses, at 0.0, 0.0 and 9.1 points.
 
 ## Agreement Report
 
-<!-- Your rate against the staff set, and every disagreement adjudicated.
+Pending. `data/staff_labels.csv` has to come from the TF and I do not have it yet. My 30 labels under the staff taxonomy are in `my_staff_labels.csv`, written before seeing the key, and `agreement.py` has not been run.
 
-     Remember you labelled these 30 under the STAFF taxonomy in
-     data/staff_taxonomy.md, not your own — so every argument below is made
-     from those definitions and those decision rules. -->
-
-**Agreement rate:** ___ / 30 = ___%
-
-<!-- Nobody grades this number. A 60% who argues every disagreement from the
-     stated rules beats a 95% who wrote "staff was right" nine times. Several
-     of the 30 were chosen because they're genuinely ambiguous — you should be
-     winning some of these. -->
-
-**Disagreements**
-
-<!-- Three lines each: the post, both labels, and who you think is right and
-     why — grounded in the staff definitions you were both applying.
-
-     Then sort each into one of three piles:
-       (a) the rule covered it and I applied it loosely → a consistency problem
-       (b) the rule genuinely doesn't say               → a gap in the definitions
-       (c) the rule is ambiguous here and my reading is defensible → argue it.
-           This is a legitimate win.
-
-     Pile (a) is the one that matters most for your diagnosis: if you applied a
-     written rule two different ways on 30 posts, that is direct evidence about
-     what you did across your own 200. -->
-
-**1.**
-> *The post:*
->
-> *Staff said / I said:*
->
-> *My call, and why:*
->
-> *Which pile:*
-
-**2.**
-> *The post:*
->
-> *Staff said / I said:*
->
-> *My call, and why:*
->
-> *Which pile:*
-
-**What the pattern in my disagreements tells me:**
-
-
-
----
+The cold-20 check from unit 5 stands as the evidence used in the diagnoses above, at 12 of 20, or 60%.
 
 ## The Improvement
 
-**What I changed:**
+**What I changed:** added 35 `banter` examples, taking the label from 40 rows to 75 and the file from 225 rows to 260. They come from the same RaceFans comment sections, labelled under the same definitions, and are marked in the `note` column. Nothing else changed, and the taxonomy and criteria are untouched.
 
-**Which diagnosis pointed at it:**
+**Why:** the diagnosis named too few `banter` examples as the cause of criteria 2 and 3 failing, and the matrix showed the whole label collapsing into `hot_take`. Of the three options in the brief, adding examples to the thinnest label is the one that addresses that directly. Relabelling the boundary was the alternative, and I rejected it because the boundary disagreements are genuine ambiguity rather than me applying a written rule two ways, which my cold-20 notes record case by case.
 
 ### Run Log — After
 
+`results_three_seeds_after.json`, same three seeds, same device.
+
 | Criterion | Target | Seed 42 | Seed 7 | Seed 2024 | Verdict |
 |---|---|---|---|---|---|
-| 1.  |  |  |  |  |  |
-| 2.  |  |  |  |  |  |
-| 3.  |  |  |  |  |  |
-| 4.  |  |  |  |  |  |
-| 5.  |  |  |  |  |  |
+| 1. Overall accuracy | ≥ 0.62 on all seeds | 0.615 | 0.590 | 0.590 | MISSED |
+| 2. Every label F1 ≥ 0.45, `analysis` ≥ 0.60 | both, all seeds | banter 0.000 / analysis 0.818 | banter 0.000 / analysis 0.762 | banter 0.000 / analysis 0.737 | MISSED |
+| 3. Each label predicted ≥ 5 times, none above 70% | both, all seeds | banter 0 | banter 0 | banter 0 | MISSED |
+| 4. Cold-20 agreement | ≥ 14 of 20 | 12 of 20 | 12 of 20 | 12 of 20 | MISSED |
+| 5. Confident beat unsure by ≥ 15 points (revised) | ≥ 15 pts | see note | see note | see note | MISSED |
 
-**Did it help, and how do I know:**
+**Confusion matrix**, seed 42, after:
 
-<!-- If it didn't, say so. Relabelling that didn't help is a genuinely
-     interesting result and earns full credit. -->
+| true \ predicted | analysis | hot_take | banter |
+|---|---|---|---|
+| **analysis** | 9 | 3 | 0 |
+| **hot_take** | 1 | 15 | 0 |
+| **banter** | 0 | 11 | 0 |
 
+**Did it help? No, and it is worth more than if it had.**
 
+| Measure | Before (mean of 3 seeds) | After (mean of 3 seeds) | Change |
+|---|---|---|---|
+| Accuracy | 0.686 | 0.598 | −0.088 |
+| Macro F1 | 0.499 | 0.478 | −0.021 |
+| Accuracy spread across seeds | 0.147 | 0.026 | −0.121 |
+| F1 — `banter` | 0.000 | 0.000 | no change |
 
----
+Accuracy went down on every seed, `banter` is still zero, and no criterion moved from missed to met. Nearly doubling a label's examples bought nothing on that label.
+
+One thing did improve, and it is not nothing. The spread across seeds fell from 0.147 to 0.026, so the model is now reliably mediocre instead of unpredictably better. The before numbers were partly a draw, and seed 42's 0.765 was the friendliest draw in the set. Adding 35 posts made the measurement honest, which lowered the number.
+
+The reason accuracy fell is visible in the matrix. `banter` went from 6 test posts to 11, and all 11 are still wrong, so the same behaviour now costs more. The model did not get worse. The test got harder, and more of it is now made of the thing my model cannot do.
 
 ## What's Still Broken
 
-<!-- For each criterion still missed: what you'd do, and why you stopped. -->
+**Criteria 2 and 3, the `banter` label.** Still F1 0.000 and still never predicted, before and after. My next move would not be more data, because 35 more rows changed nothing. It would be to test whether the label is learnable at all at this size, by training a two-label model on `analysis` against everything else. If that scores well, the problem is three-way separation on 260 rows. If it does not, the problem is my definition. I stopped because the unit allows one improvement and I spent it on the data.
 
+**Criterion 1, accuracy.** It is now further from the target than it was. I would not chase it directly, since accuracy here is mostly a measure of how much `hot_take` is in the test split.
 
+**Criterion 4, agreement.** 60% against my own 70% target, and the staff check is still pending. This is the one I would fix first, because the diagnoses above all lean on it and it is the only number that distinguishes my labelling from my model.
 
-**The gap between what I meant my labels to capture and what the model
-learned:**
-<!-- Two sentences. Your confusion matrix is the evidence. -->
-
-
+**The gap between what I meant to capture and what the model learned.** I meant three kinds of post, separated by whether a claim is supported and whether the writer is joking. The matrix says the model learned two, which are "has specific details in it" and "everything else", and it files every joke under the second. The `banter` row of the confusion matrix is entirely in the `hot_take` column in both runs, which means the distinction I care most about, between arguing badly and not arguing at all, is the one that never reached the model.
 
 <!-- ═════════════════════════════════════════════════════════════════════
 

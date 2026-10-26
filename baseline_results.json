@@ -1,25 +1,25 @@
 {
   "model": "facebook/bart-large-mnli",
-  "n": 34,
+  "n": 39,
   "seed": 42,
   "held_out": true,
   "used_definitions": true,
   "scores": {
-    "n": 34,
-    "accuracy": 0.38235294117647056,
-    "f1_macro": 0.27380952380952384,
+    "n": 39,
+    "accuracy": 0.3333333333333333,
+    "f1_macro": 0.22149481723949807,
     "per_label": {
       "analysis": {
-        "precision": 0.4,
+        "precision": 0.34285714285714286,
         "recall": 1.0,
-        "f1": 0.5714285714285715,
+        "f1": 0.5106382978723404,
         "support": 12
       },
       "banter": {
         "precision": 0.5,
-        "recall": 0.16666666666666666,
-        "f1": 0.25,
-        "support": 6
+        "recall": 0.09090909090909091,
+        "f1": 0.15384615384615385,
+        "support": 11
       },
       "hot_take": {
         "precision": 0.0,
@@ -31,73 +31,8 @@
   },
   "predictions": [
     {
-      "text": "I do like these 9am and 8am starts, means I still have the majority of the weekend for other non-F1 activities. The only problem is that there\u2019s a group of us that usually watch in the local hostelry, and it\u2019s not open at that time of day (probably not a bad thing I guess!).",
-      "gold": "analysis",
-      "predicted": "analysis"
-    },
-    {
-      "text": "This goes mostly for the statistics of Vettel and Hamilton. They heavily distort the actual picture behind it which is not as good as the statistics make them look.",
+      "text": "He can always be a development driver or whatever. But to be stuck with that or race somewhere else, it\u2019s probably better to race somewhere else. It\u2019s not like he\u2019s still young enough to get a 2nd chance; he already had his.",
       "gold": "hot_take",
-      "predicted": "analysis"
-    },
-    {
-      "text": "Nor was that implied, Max was sandwiched between the Ferraris of Seb and Kimi. I\u2019d blame Seb predominantly as he squeezed Max dry, but as it usually happens in L1T1 collisions it was deemed a racing incident with no penalties.",
-      "gold": "analysis",
-      "predicted": "analysis"
-    },
-    {
-      "text": "To think in 1955 for example the british gp, at aintree, lasted over 3h, they had 90 laps, each of which took at least 2 mins; now they have less laps, which are also faster, these days only wet spa manages to reach 2 mins and you know what happens when it rains there; also vegas and baku would reach 2 mins in full wet conditions, but all these tracks would only run 44-50 something laps.",
-      "gold": "analysis",
-      "predicted": "analysis"
-    },
-    {
-      "text": "I am always happy to see a Rookie on the grid. I wish him well as either an eye opener or a mobile chicane.",
-      "gold": "banter",
-      "predicted": "analysis"
-    },
-    {
-      "text": "Close but not quite right. The rule change actually moved capex OUT of the cap but brought depreciation IN. If you want to spend x numbers of tens of millions on a new wind tunnel, you can, you will just pay for it over 10/15/20 years.",
-      "gold": "analysis",
-      "predicted": "analysis"
-    },
-    {
-      "text": "LOL They literally gave the land back and walked away from it. Weird statement.",
-      "gold": "banter",
-      "predicted": "banter"
-    },
-    {
-      "text": "Who else would they get? Why would Alonso retire after a season like this? Maybe, just maybe, Alonso and Aston Martin might get a better season than this one. They would hope for improvement.",
-      "gold": "hot_take",
-      "predicted": "analysis"
-    },
-    {
-      "text": "So the championship changed hands twice in those 20 laps held at sundown in Singapore. Russell \u2013 > Norris \u2013 > Leclerc = Russell. That is super exciting.",
-      "gold": "analysis",
-      "predicted": "analysis"
-    },
-    {
-      "text": "Yeah OK, but something a bit stronger, condemning death threats might\u2019ve been nice. Sometimes you have to speak out and be brave, especially when you\u2019re in a position of influence, which he\u2019s very much in.",
-      "gold": "hot_take",
-      "predicted": "analysis"
-    },
-    {
-      "text": "Who knows, you can go from the back on the grid to be somewhat competitive in a season.",
-      "gold": "hot_take",
-      "predicted": "analysis"
-    },
-    {
-      "text": "Yes, in that sense this season has certainly been a success, piastri even lost a win because of a badly timed VSC, otherwise we\u2019d be looking at 7 drivers out of 8 in the top teams with at least a win.",
-      "gold": "analysis",
-      "predicted": "analysis"
-    },
-    {
-      "text": "F1 is a bit of a weird as a sport in terms of length of time a race takes. Typically non F1 fans in the past would make remarks to me like they go on forever but now with the DtS generation I often find myself explaining in very brief terms that we can guess that Monza will be over very quickly if it\u2019s dry and why that is. I doubt the vast majority of F1\u2019s newer fans will notice any difference with these lap reductions. If I ever get frustrated explaining conditions, duration and quirks I remind myself that F1 is probably still easier than cricket.",
-      "gold": "hot_take",
-      "predicted": "analysis"
-    },
-    {
-      "text": "@bernasaurus The same for long-time fans since the difference is only 2 or 3 laps, depending on the circuit, i.e., no different from any race that loses 2 or 3 laps for as many extra formation laps.",
-      "gold": "analysis",
       "predicted": "analysis"
     },
     {
@@ -106,13 +41,58 @@
       "predicted": "hot_take"
     },
     {
-      "text": "To be fair, it is the \u201cpretend\u201d 2027 calendar, if this year is anything to go by. ;)",
+      "text": "@bernasaurus The same for long-time fans since the difference is only 2 or 3 laps, depending on the circuit, i.e., no different from any race that loses 2 or 3 laps for as many extra formation laps.",
+      "gold": "analysis",
+      "predicted": "analysis"
+    },
+    {
+      "text": "If the costs cap falls, it has achieved nothing. The ultimate goal should\u2019ve always been cap the costs and let them do whatever they want within that cap \u2013 unlimited testing, spare cars, as many components as the want, the works.",
+      "gold": "hot_take",
+      "predicted": "analysis"
+    },
+    {
+      "text": "Well, given you raised the example of the Swiss GP held at Dijon Prenois, wasn\u2019t it also rather mad to name that race after a country famous for banning most forms of motorsport (with the ban on circuit racing only finally being lifted in July 2026)?",
+      "gold": "analysis",
+      "predicted": "analysis"
+    },
+    {
+      "text": "As a long suffering Ferrari fan, finally Leclerc is champion of something.",
       "gold": "banter",
       "predicted": "analysis"
     },
     {
-      "text": "Well of course! My bad, I should have noticed that there were several other circuits missing! Besides Zandvoort I have found another eight circuits in which both have raced (please correct me if I have missed any). In five of them both have won (Imola, Barcelona, Paul Ricard, Hockenheimring and Sepang). The other three are: Sochi and Nurburgring (where Lewis won but Max could only be second) and Mugello where Lewis won but Max DNF\u2019d). All considered, it turns the tables a bit with Lewis coming slightly ahead.",
+      "text": "So the championship changed hands twice in those 20 laps held at sundown in Singapore. Russell \u2013 > Norris \u2013 > Leclerc = Russell. That is super exciting.",
       "gold": "analysis",
+      "predicted": "analysis"
+    },
+    {
+      "text": "Apologies, i was at the race, it was 9 years ago and i didnt check Wikipedia before writing. Thanks for doing my research, give you a shout next time",
+      "gold": "banter",
+      "predicted": "analysis"
+    },
+    {
+      "text": "@tacit On which matter? Flavio has done more than one thing in his career that has excited moral debate.",
+      "gold": "banter",
+      "predicted": "analysis"
+    },
+    {
+      "text": "People call him \u201cCrashpinto,\u201d I\u2019ve never heard him being called that before and as you can see here you\u2019re the first person to use that word on this website .",
+      "gold": "banter",
+      "predicted": "banter"
+    },
+    {
+      "text": "most politicians are tools of big finance/corporate influence. And Domenicali is clearly a politician/salesman.",
+      "gold": "hot_take",
+      "predicted": "analysis"
+    },
+    {
+      "text": "Finally, they\u2019ll be able to consistently enforce track limits, to the benefit of all!",
+      "gold": "banter",
+      "predicted": "analysis"
+    },
+    {
+      "text": "Given Ocon\u2019s past, my assumption is that for the remainder of the year he will solely be focusing on beating his team mate, whatever the cost. So that will include blocking his teammate, diving down the inside of his teammate with no care for the outcome, often bumping into his teammate and his post race commentary will be around not having the same equipment.",
+      "gold": "hot_take",
       "predicted": "analysis"
     },
     {
@@ -121,7 +101,52 @@
       "predicted": "hot_take"
     },
     {
-      "text": "As the younger generations are brought up on everything happening more quickly or instantly, and people start to accept sprint races are not going (begrudgingly), I am sure there will start to be questions raised about making race distances shorter. I am, to be honest pleasantly surprised that F1 have said that the full race distances will be restored in 2028. I was not expecting that. As with everything it depends on the quality of the \u2018entertainment\u2019. A boring standard full length race can seem interminable if there\u2019s not much going on or no real battles for places.",
+      "text": "I do like these 9am and 8am starts, means I still have the majority of the weekend for other non-F1 activities. The only problem is that there\u2019s a group of us that usually watch in the local hostelry, and it\u2019s not open at that time of day (probably not a bad thing I guess!).",
+      "gold": "analysis",
+      "predicted": "analysis"
+    },
+    {
+      "text": "Yes, in that sense this season has certainly been a success, piastri even lost a win because of a badly timed VSC, otherwise we\u2019d be looking at 7 drivers out of 8 in the top teams with at least a win.",
+      "gold": "analysis",
+      "predicted": "analysis"
+    },
+    {
+      "text": "Ever since FIA made F2 and F3 the \u201cofficial\u201d laders to F1 through the points systems, pretty much what you have is pay drivers",
+      "gold": "hot_take",
+      "predicted": "analysis"
+    },
+    {
+      "text": "Not really much different to Cadillac, 2 known knowns. If they can build a car that makes Lance fast, then they will know they have built a great car.",
+      "gold": "hot_take",
+      "predicted": "analysis"
+    },
+    {
+      "text": "The cost cap merely introduces yet another area of competition and clever engineering \u2013 this time in accountancy and law, rather than aero and software. If we want the teams to spend less, the way to do it is to give them a disincentive to spend. Perhaps winning should mean having to pay money rather than win money? Why bother make teams build their own cars when they are so regulated that they all look identical? Perhaps Dallara could build the tubs for all the teams? Or forget the idea of a cost cap altogether, and let the billionaires duke it out?",
+      "gold": "hot_take",
+      "predicted": "analysis"
+    },
+    {
+      "text": "Yeah OK, but something a bit stronger, condemning death threats might\u2019ve been nice. Sometimes you have to speak out and be brave, especially when you\u2019re in a position of influence, which he\u2019s very much in.",
+      "gold": "hot_take",
+      "predicted": "analysis"
+    },
+    {
+      "text": "Well \u201csome\u201d will return to full race distance in 2028. Other events I suspect will devolve into multiple sprints (probably 3, 1 being reverse grid) by then. After all, sprints are incredibly popular with the fans.",
+      "gold": "hot_take",
+      "predicted": "analysis"
+    },
+    {
+      "text": "Close but not quite right. The rule change actually moved capex OUT of the cap but brought depreciation IN. If you want to spend x numbers of tens of millions on a new wind tunnel, you can, you will just pay for it over 10/15/20 years.",
+      "gold": "analysis",
+      "predicted": "analysis"
+    },
+    {
+      "text": "Ahah, that\u2019s an interesting indirect way to complain about a driver crashing into him!",
+      "gold": "banter",
+      "predicted": "analysis"
+    },
+    {
+      "text": "I\u2019m sure Alonso\u2019s decision is in great part to what he knows and has seen about Aston\u2019s plans for the rest of this year and the more so what\u2019s coming next year. Pretty sure Newey or Lawrence don\u2019t want their competence in their respective positions to further be questioned and examined under a microscope if they don\u2019t improve pretty drastically next season with everything they know now and the formula getting a bit better next year with the drivetrain.",
       "gold": "hot_take",
       "predicted": "analysis"
     },
@@ -131,18 +156,28 @@
       "predicted": "analysis"
     },
     {
+      "text": "To think in 1955 for example the british gp, at aintree, lasted over 3h, they had 90 laps, each of which took at least 2 mins; now they have less laps, which are also faster, these days only wet spa manages to reach 2 mins and you know what happens when it rains there; also vegas and baku would reach 2 mins in full wet conditions, but all these tracks would only run 44-50 something laps.",
+      "gold": "analysis",
+      "predicted": "analysis"
+    },
+    {
+      "text": "Count yourself lucky it\u2019s not the Sports Direct GP, or Grand Prix of Etihad (yet).",
+      "gold": "banter",
+      "predicted": "analysis"
+    },
+    {
       "text": "On the other occasion he was wiped out by the Ferrari drivers Seb didn\u2019t drive both Ferraris.",
       "gold": "analysis",
       "predicted": "analysis"
     },
     {
-      "text": "Well, given you raised the example of the Swiss GP held at Dijon Prenois, wasn\u2019t it also rather mad to name that race after a country famous for banning most forms of motorsport (with the ban on circuit racing only finally being lifted in July 2026)?",
-      "gold": "analysis",
+      "text": "This \u201cRedBull is just a drinks company!\u201d-argument really does not land the way people muttering it out loud hope it does. You do realise that makes these other, so caller, proper racing/engineering teams look even worse! Do you? How can a mere drinks company just waltz in, hire just one of the greatest designers in the sport, and then go on to produce seriously competitive machines? This mere drinks company had a period of dominance even? \u2026all while competing against such serious engineering marvels as Mercedes, Ferrari, McLaren, Renault?",
+      "gold": "hot_take",
       "predicted": "analysis"
     },
     {
-      "text": "A shame sprints are considered so unimportant, cause that would\u2019ve looked like an interesting battle, with all so close, however IF it had been a meaningful prize, certainly russell would\u2019ve taken it easier, no need to take risks when 8 or 7 points would still end up with him being the sprint champion, and likewise norris wouldn\u2019t have taken such a big risk with the move on piastri.",
-      "gold": "hot_take",
+      "text": "don\u2019t forget to tick the box that says, has formerly committed, or is interested in committing human atrocities at scale, inside your own or a foreign state.",
+      "gold": "banter",
       "predicted": "analysis"
     },
     {
@@ -151,53 +186,43 @@
       "predicted": "analysis"
     },
     {
-      "text": "Russell and Leclerc are still involved in the fight for P2 in the actual championship (if that means anything for them), along with Hamilton, Verstappen and Norris.",
-      "gold": "analysis",
-      "predicted": "analysis"
-    },
-    {
-      "text": "Yet Lance gets a drive no matter what, but as we know, that\u2019s nepotism gone wild.",
-      "gold": "hot_take",
-      "predicted": "analysis"
-    },
-    {
-      "text": "I made my one and only trip to the Brickyard. I remember it vividly. Great Day, what a driver.",
-      "gold": "hot_take",
-      "predicted": "analysis"
-    },
-    {
-      "text": "Theres always people who will say \u2018he should\u2019ve said this or should\u2019ve said at at this time or that\u2019. He was certainly guided by his team and they may well have asked him to hold fire, to not further inflame a tricky situation. And it wont be his PR as you so demeaningly put it, it will be THE TEAM",
-      "gold": "hot_take",
-      "predicted": "analysis"
-    },
-    {
-      "text": "He\u2019s never going away is he. Yes there is a strong argument that he should retire to let new blood into the sport. But if the likes of Lance and pay to play drivers are allowed to waste seats then why not hang onto a very genuine and entertaining Champ like Fernando?",
-      "gold": "hot_take",
-      "predicted": "analysis"
-    },
-    {
-      "text": "Then How come it is. Only the Hulk comes back from mediocre and that\u2019s only because they made him angry",
+      "text": "The reports looked like speculative drivel from clickbait hunters (plus an attention-seeking ex-boss).",
       "gold": "hot_take",
       "predicted": "banter"
     },
     {
-      "text": "Maybe I\u2019m wrong, but it feels like Singapore tends to be a bit of streak ender.",
+      "text": "A bit of a shame really, I wanted to see Alonso fighting for the win in another categories, endurance, indycar, even off-road races. Seems like a waste of talent to spend it in a Formula that had been mutilated and more over in the worst car of the grid",
       "gold": "hot_take",
       "predicted": "analysis"
     },
     {
-      "text": "They\u2019re joint vice-champions. Who would be the title sponsor? Ratners?",
+      "text": "Well of course! My bad, I should have noticed that there were several other circuits missing! Besides Zandvoort I have found another eight circuits in which both have raced (please correct me if I have missed any). In five of them both have won (Imola, Barcelona, Paul Ricard, Hockenheimring and Sepang). The other three are: Sochi and Nurburgring (where Lewis won but Max could only be second) and Mugello where Lewis won but Max DNF\u2019d). All considered, it turns the tables a bit with Lewis coming slightly ahead.",
+      "gold": "analysis",
+      "predicted": "analysis"
+    },
+    {
+      "text": "He wants to drive an actual Newey car, not the hodgepodge they have now.",
+      "gold": "hot_take",
+      "predicted": "analysis"
+    },
+    {
+      "text": "I really like this track. And it is much better some of the \u201cregular\u201d F1 tracks. Not sure what the 2026 specs look like on this race though.",
+      "gold": "hot_take",
+      "predicted": "analysis"
+    },
+    {
+      "text": "!!! \u201cTeam\u201d take decision to benefit Verstappen !!!! \u2013 in other news \u2013 !!! Pope remains Catholic !!!",
       "gold": "banter",
       "predicted": "analysis"
     },
     {
-      "text": "An excellent circuit. Will be good to see F1 there again. Has been the scene of good overtaking/racing down the years.",
-      "gold": "hot_take",
+      "text": "Nor was that implied, Max was sandwiched between the Ferraris of Seb and Kimi. I\u2019d blame Seb predominantly as he squeezed Max dry, but as it usually happens in L1T1 collisions it was deemed a racing incident with no penalties.",
+      "gold": "analysis",
       "predicted": "analysis"
     },
     {
-      "text": "This \u201cRedBull is just a drinks company!\u201d-argument really does not land the way people muttering it out loud hope it does. You do realise that makes these other, so caller, proper racing/engineering teams look even worse! Do you? How can a mere drinks company just waltz in, hire just one of the greatest designers in the sport, and then go on to produce seriously competitive machines? This mere drinks company had a period of dominance even? \u2026all while competing against such serious engineering marvels as Mercedes, Ferrari, McLaren, Renault?",
-      "gold": "hot_take",
+      "text": "Russell and Leclerc are still involved in the fight for P2 in the actual championship (if that means anything for them), along with Hamilton, Verstappen and Norris.",
+      "gold": "analysis",
       "predicted": "analysis"
     }
   ]

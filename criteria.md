@@ -91,6 +91,10 @@ If two people cannot apply my definitions the same way, then the model was train
 
 Predictions where the model's top probability is at least 0.80 are correct at least 15 percentage points more often than predictions below 0.60.
 
+> **Revised in unit 6:** Predictions in the most confident third are correct at least 15 percentage points more often than predictions in the least confident third.
+>
+> **Why revised:** No prediction the model makes ever reaches 0.80. The highest top-probability across the 34 test posts on seed 42 is 0.574, with a mean of 0.499, so both bands the original names are empty and it returns no verdict at all. Three labels and three epochs on 157 training rows leave the model close to uniform. The revision measures the same idea against thirds, which `results.json` already records, and it still misses at 0.0, 0.0 and 9.1 points.
+
 **Why this target:**
 A classifier that is equally wrong when sure and unsure is unusable for triage, which is the only thing I would ever want this for. Sorting a day of comments means reading the confident `analysis` ones first and ignoring the rest. I chose a gap in percentage points rather than two separate accuracy numbers, because the gap is what makes the confidence score worth reading.
 
